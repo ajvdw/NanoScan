@@ -1,6 +1,7 @@
 // NanoScan
 // Keyboard Matrix Scanner (6x6) based on Arduino Nano
 // incl 8 buttons with led's readout
+// D13 is unusable on Nano with Led on D13
 
 int s[30]; // 30 stops default off
 
@@ -14,21 +15,9 @@ void setup()
   Serial.println("Debugging NanoScan");
 #endif
 
-  pinMode( 13, OUTPUT ); // D13 is a led output, ignore
-  pinMode( 12, INPUT_PULLUP );
-  pinMode( 11, INPUT_PULLUP );
-  pinMode( 10, INPUT_PULLUP );
-  pinMode( 9, INPUT_PULLUP );
-  pinMode( 8, INPUT_PULLUP );
-  pinMode( 7, OUTPUT );
-  pinMode( 6, OUTPUT );
-  pinMode( 5, OUTPUT );
-  pinMode( 4, OUTPUT );
-  pinMode( 3, OUTPUT );
-  pinMode( 2, OUTPUT );
-
-  for( int i=0; i<30; i++ ) s[i]=1;
-
+  for( int i=8; i<=12; i++ ) pinMode( i, INPUT );
+  for( int j=2; j<=7; j++ ) pinMode( j, OUTPUT );
+  for( int k=0; k<30; k++ ) s[k]=1;
 }
 
 void loop()
